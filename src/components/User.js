@@ -40,13 +40,25 @@ export class User extends Component {
 		return (
 			<tr>
 				<td>
-					<input name="name" value={name} onChange={this.handleChange} />
+					<input
+						name="name"
+						value={this.state.name}
+						onChange={this.handleChange}
+					/>
 				</td>
 				<td>
-					<input name="email" value={email} onChange={this.handleChange} />
+					<input
+						name="email"
+						value={this.state.email}
+						onChange={this.handleChange}
+					/>
 				</td>
 				<td>
-					<input name="phone" value={phone} onChange={this.handleChange} />
+					<input
+						name="phone"
+						value={this.state.phone}
+						onChange={this.handleChange}
+					/>
 				</td>
 				<td>
 					<button onClick={this.handleEditUser}>Edit</button>

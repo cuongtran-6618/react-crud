@@ -21,7 +21,23 @@ export class UserList extends Component {
 		}));
 	}
 
-	handleEdit(user) {}
+	handleEdit(updatedUser) {
+		let data = [...this.state.data];
+		data = data.map((user) => {
+			return user.id === updatedUser.id
+				? {
+						...user,
+						name: updatedUser.name,
+						email: updatedUser.email,
+						phone: updatedUser.phone,
+				  }
+				: user;
+		});
+
+		this.setState((previousState) => ({
+			data,
+		}));
+	}
 
 	handleDelete(id) {
 		this.setState((previousState) => ({
