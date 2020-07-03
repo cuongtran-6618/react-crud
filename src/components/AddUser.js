@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 export class AddUser extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			id: uuidv4(),
 			name: "",
 			email: "",
 			phone: "",
@@ -17,8 +15,6 @@ export class AddUser extends Component {
 
 	handleSubmitForm(e) {
 		e.preventDefault();
-		console.log("submit form");
-
 		this.props.onCreateUser(this.state);
 
 		// clear form after submit

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import User from "./User";
 import AddUser from "./AddUser";
 import { users } from "../databases/fake/users";
+import { v4 as uuidv4 } from "uuid";
 
 export class UserList extends Component {
 	constructor(props) {
@@ -17,7 +18,7 @@ export class UserList extends Component {
 
 	handleCreate(user) {
 		this.setState((previousState) => ({
-			data: [...previousState.data, user],
+			data: [...previousState.data, { ...user, id: uuidv4() }],
 		}));
 	}
 
