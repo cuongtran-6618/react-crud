@@ -16,23 +16,26 @@ export class UserList extends Component {
 	}
 
 	handleCreate(user) {
-		console.log(user);
-
 		this.setState((previousState) => ({
 			data: [...previousState.data, user],
 		}));
 	}
 
-	handleEdit(e) {
-		console.log("edit a new user");
-	}
+	handleEdit(user) {}
 
-	handleDelete(e) {
-		console.log("delete a new user");
+	handleDelete(id) {
+		this.setState((previousState) => ({
+			data: [
+				...previousState.data.filter((user) => {
+					if (user.id !== id) {
+						return user;
+					}
+				}),
+			],
+		}));
 	}
 
 	render() {
-		console.log(this.state);
 		const listUser = this.state.data.map((user) => (
 			<User
 				key={user.id}

@@ -7,33 +7,52 @@ export class User extends Component {
 		super(props);
 
 		this.state = {
-			name: "",
-			email: "",
-			phone: "",
+			id: this.props.user.id,
+			name: this.props.user.name,
+			email: this.props.user.email,
+			phone: this.props.user.phone,
 		};
 
 		this.handleChange = this.handleChange.bind(this);
+		this.handleEditUser = this.handleEditUser.bind(this);
+		this.handleDeleteUser = this.handleDeleteUser.bind(this);
 	}
 
-	handleChange(e) {}
+	handleChange(e) {
+		this.setState({
+			[e.target.name]: e.target.value,
+		});
+	}
+
+	handleEditUser(e) {
+		console.log("edit button clicked");
+		this.props.onEditUser(this.state);
+	}
+
+	handleDeleteUser(e) {
+		console.log("delete button clicked");
+		this.props.onDeleteUser(this.state.id);
+	}
 
 	render() {
+		const { id, name, email, phone } = this.props.user;
+
 		return (
 			<tr>
 				<td>
-					<input value={this.props.user.name} onChange={this.handleChange} />
+					<input name="name" value={name} onChange={this.handleChange} />
 				</td>
 				<td>
-					<input value={this.props.user.email} onChange={this.handleChange} />
+					<input name="email" value={email} onChange={this.handleChange} />
 				</td>
 				<td>
-					<input value={this.props.user.phone} onChange={this.handleChange} />
+					<input name="phone" value={phone} onChange={this.handleChange} />
 				</td>
 				<td>
-					<button>Edit</button>
+					<button onClick={this.handleEditUser}>Edit</button>
 				</td>
 				<td>
-					<button>Delete</button>
+					<button onClick={this.handleDeleteUser}>Delete</button>
 				</td>
 			</tr>
 		);
