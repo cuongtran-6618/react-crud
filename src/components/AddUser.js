@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 export class AddUser extends Component {
 	constructor(props) {
@@ -19,6 +18,8 @@ export class AddUser extends Component {
 		console.log("submit form");
 
 		this.props.onCreateUser(this.state);
+
+		// clear form after submit
 		this.clearForm();
 	}
 
@@ -41,9 +42,7 @@ export class AddUser extends Component {
 	}
 
 	render() {
-		let nameInput;
-		let emailInput;
-		let phoneInput;
+		let nameInput, emailInput, phoneInput;
 		return (
 			<div>
 				<form onSubmit={this.handleSubmitForm}>

@@ -5,6 +5,13 @@ import { users } from "../databases/fake/users";
 export class User extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			name: "",
+			email: "",
+			phone: "",
+		};
+
 		this.handleChange = this.handleChange.bind(this);
 	}
 
