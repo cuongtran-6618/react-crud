@@ -42,27 +42,40 @@ export class AddUser extends Component {
 	render() {
 		let nameInput, emailInput, phoneInput;
 		return (
-			<div>
-				<form onSubmit={this.handleSubmitForm}>
-					<input
-						name="name"
-						placeholder="fullname"
-						onChange={this.handleOnChange}
-						ref={(node) => (this.nameInput = node)}
-					/>
-					<input
-						name="email"
-						placeholder="email"
-						onChange={this.handleOnChange}
-						ref={(node) => (this.emailInput = node)}
-					/>
-					<input
-						name="phone"
-						placeholder="phone"
-						onChange={this.handleOnChange}
-						ref={(node) => (this.phoneInput = node)}
-					/>
-					<button type="submit">Add new user</button>
+			<div className="row white">
+				<form onSubmit={this.handleSubmitForm} className="col s12">
+					<div className="input-field col s3">
+						<input
+							name="name"
+							placeholder="Full name"
+							onChange={this.handleOnChange}
+							ref={(node) => (this.nameInput = node)}
+						/>
+					</div>
+					<div className="input-field col s3">
+						<input
+							name="email"
+							placeholder="Email address"
+							onChange={this.handleOnChange}
+							ref={(node) => (this.emailInput = node)}
+						/>
+					</div>
+					<div className="input-field col s3">
+						<input
+							name="phone"
+							placeholder="Phone number"
+							onChange={this.handleOnChange}
+							ref={(node) => (this.phoneInput = node)}
+						/>
+					</div>
+					<div className="input-field col s3">
+						<button
+							className="btn-small waves-effect waves-light right"
+							type="submit"
+						>
+							Add new user
+						</button>
+					</div>
 				</form>
 			</div>
 		);
