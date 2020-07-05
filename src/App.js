@@ -1,10 +1,11 @@
 import React from "react";
 import UserList from "./components/UserList";
+import Title from "./components/Title";
 
 function App() {
 	return (
-		<div className="App container grey">
-			<h1 className="blue-text white">List of customer</h1>
+		<div className="App main-container">
+			<Title />
 			<UserList />
 		</div>
 	);

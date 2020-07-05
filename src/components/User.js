@@ -13,25 +13,28 @@ export class User extends Component {
 			phone: this.props.user.phone,
 		};
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleEditUser = this.handleEditUser.bind(this);
+		this.handleCancelEditUser = this.handleCancelEditUser.bind(this);
 		this.handleDeleteUser = this.handleDeleteUser.bind(this);
+		this.handleEnableEditUser = this.handleEnableEditUser.bind(this);
+		this.handleSaveUser = this.handleSaveUser.bind(this);
 	}
 
-	handleChange(e) {
+	handleCancelEditUser(e) {}
+
+	handleDeleteUser(e) {
+		console.log("delete button clicked");
+		this.props.onDeleteUser(this.state.id);
+	}
+
+	handleEnableEditUser(e) {
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
 	}
 
-	handleEditUser(e) {
+	handleSaveUser(e) {
 		console.log("edit button clicked");
 		this.props.onEditUser(this.state);
-	}
-
-	handleDeleteUser(e) {
-		console.log("delete button clicked");
-		this.props.onDeleteUser(this.state.id);
 	}
 
 	render() {
@@ -40,32 +43,29 @@ export class User extends Component {
 		return (
 			<tr>
 				<td>
-					<input
-						name="name"
-						value={this.state.name}
-						onChange={this.handleChange}
-					/>
+					<input name="name" value={this.state.name} />
 				</td>
 				<td>
-					<input
-						name="email"
-						value={this.state.email}
-						onChange={this.handleChange}
-					/>
+					<input name="email" value={this.state.email} />
 				</td>
 				<td>
-					<input
-						name="phone"
-						value={this.state.phone}
-						onChange={this.handleChange}
-					/>
+					<input name="phone" value={this.state.phone} />
 				</td>
 				<td>
-					<button onClick={this.handleEditUser}>Edit</button>
+					<button className="transparent" onClick={this.handleCancelEditUser}>
+						Cancel
+					</button>
+					<button className="transparent" onClick={this.handleSaveUser}>
+						Save change
+					</button>
+					<button className="transparent" onClick={this.handleEnableEditUser}>
+						Enable Edit
+					</button>
+					<button className="transparent" onClick={this.handleDeleteUser}>
+						Delete
+					</button>
 				</td>
-				<td>
-					<button onClick={this.handleDeleteUser}>Delete</button>
-				</td>
+				<td></td>
 			</tr>
 		);
 	}
