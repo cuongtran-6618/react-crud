@@ -44,7 +44,7 @@ export class AddUser extends Component {
 		return (
 			<div className="row white">
 				<form onSubmit={this.handleSubmitForm} className="col s12">
-					<div className="input-field col s3">
+					<div className="col s3">
 						<input
 							name="name"
 							placeholder="Full name"
@@ -52,7 +52,7 @@ export class AddUser extends Component {
 							ref={(node) => (this.nameInput = node)}
 						/>
 					</div>
-					<div className="input-field col s3">
+					<div className="col s3">
 						<input
 							name="email"
 							placeholder="Email address"
@@ -60,7 +60,7 @@ export class AddUser extends Component {
 							ref={(node) => (this.emailInput = node)}
 						/>
 					</div>
-					<div className="input-field col s3">
+					<div className=" col s3">
 						<input
 							name="phone"
 							placeholder="Phone number"
@@ -68,7 +68,7 @@ export class AddUser extends Component {
 							ref={(node) => (this.phoneInput = node)}
 						/>
 					</div>
-					<div className="input-field col s3">
+					<div className="col s3">
 						<button
 							className="btn-small waves-effect waves-light right"
 							type="submit"
