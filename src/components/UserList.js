@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import User from "./User";
 import AddUser from "./AddUser";
+import Header from "./Header";
 import { users } from "../databases/fake/users";
 import { v4 as uuidv4 } from "uuid";
+import sortArray from "../util/sortArray";
 
 export class UserList extends Component {
 	constructor(props) {
@@ -14,6 +16,7 @@ export class UserList extends Component {
 		this.handleCreate = this.handleCreate.bind(this);
 		this.handleEdit = this.handleEdit.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
+		this.handleSorting = this.handleSorting.bind(this);
 	}
 
 	handleCreate(user) {
@@ -52,6 +55,13 @@ export class UserList extends Component {
 		}));
 	}
 
+	handleSorting(sortField, direction = "acs") {
+		console.log(sortField, direction);
+		this.setState((previousState) => ({
+			data: [...previousState.data].sort(sortArray(sortField, direction)),
+		}));
+	}
+
 	render() {
 		const listUser = this.state.data.map((user) => (
 			<User
@@ -64,7 +74,8 @@ export class UserList extends Component {
 		return (
 			<div>
 				<AddUser onCreateUser={this.handleCreate} />
-				<table>
+				<table className="white">
+					<Header user={this.state.data} onSortUser={this.handleSorting} />
 					<tbody>{listUser}</tbody>
 				</table>
 			</div>
