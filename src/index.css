@@ -19,6 +19,10 @@ html {
 	display: none;
 }
 
+.show {
+	display: block;
+}
+
 i {
 	color: #909090;
 }
@@ -46,13 +50,13 @@ button {
 	border: none;
 }
 
-.btn-save {
+.actions-container button:nth-child(2) {
 	color: #fff;
 	background: #07f;
 	font-weight: 500;
 }
 
-.btn-cancel {
+.actions-container button:first {
 	color: #07f;
 	background: #f2f2f2;
 	font-weight: 500;
@@ -67,9 +71,16 @@ thead {
 
 thead th {
 	padding: 15px;
+	font-weight: 500;
 }
 
 th,
 td {
 	padding: 0 20px;
+}
+
+.actions-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 }
