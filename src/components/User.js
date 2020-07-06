@@ -9,6 +9,7 @@ export class User extends Component {
 		name: this.props.user.name,
 		email: this.props.user.email,
 		phone: this.props.user.phone,
+		disableEdit: true,
 	};
 
 	handleCancelEditUser = (e) => {
@@ -19,6 +20,7 @@ export class User extends Component {
 		);
 
 		utility.loopObject(previousState, this.setStateByKey);
+		this.hideEditForm();
 	};
 
 	handleDeleteUser = (e) => {
@@ -28,6 +30,7 @@ export class User extends Component {
 	//save the previous value to localstorage for recovering when customer doesn't wanna change
 	handleEnableEditUser = (e) => {
 		utility.saveStateToLocalStorage({ ...this.state });
+		this.showEditForm();
 	};
 
 	handleOnChange = (e) => {
@@ -39,12 +42,21 @@ export class User extends Component {
 
 		//erase the localstorage
 		utility.saveStateToLocalStorage({ id: "", name: "", email: "", phone: "" });
+		this.hideEditForm();
+	};
+
+	showEditForm = () => {
+		this.setStateByKey("disableEdit", false);
+	};
+
+	hideEditForm = () => {
+		this.setStateByKey("disableEdit", true);
 	};
 
 	setStateByKey = (key, value) => {
-		this.setState({
-			[key]: value,
-		});
+		this.setState((previousState) => ({
+			[key]: (previousState[key] = value),
+		}));
 	};
 
 	render() {
@@ -52,7 +64,7 @@ export class User extends Component {
 			<tr>
 				<td colSpan="1">
 					<input
-						disabled
+						disabled={this.state.disableEdit}
 						name="name"
 						value={this.state.name}
 						onChange={this.handleOnChange}
@@ -62,7 +74,7 @@ export class User extends Component {
 				</td>
 				<td colSpan="1">
 					<input
-						disabled
+						disabled={this.state.disableEdit}
 						name="email"
 						value={this.state.email}
 						onChange={this.handleOnChange}
@@ -72,7 +84,7 @@ export class User extends Component {
 				</td>
 				<td colSpan="1">
 					<input
-						disabled
+						disabled={this.state.disableEdit}
 						name="phone"
 						value={this.state.phone}
 						onChange={this.handleOnChange}
@@ -80,23 +92,32 @@ export class User extends Component {
 						type="text"
 					/>
 				</td>
-				<td colSpan="1">
+				<td colSpan="1" className="actions-container">
 					<button
-						className="btn-cancel hidden"
+						className={this.state.disableEdit ? "hidden" : "show"}
 						onClick={this.handleCancelEditUser}
 					>
 						Cancel
 					</button>
-					<button className="btn-save hidden" onClick={this.handleSaveUser}>
+					<button
+						className="btn-save"
+						onClick={this.handleSaveUser}
+						className={this.state.disableEdit ? "hidden" : "show"}
+					>
 						Save
 					</button>
 					<button
 						className="transparent right"
 						onClick={this.handleEnableEditUser}
+						className={!this.state.disableEdit ? "hidden" : "show"}
 					>
 						<i className="material-icons">create</i>
 					</button>
-					<button className="transparent right" onClick={this.handleDeleteUser}>
+					<button
+						className="transparent right"
+						onClick={this.handleDeleteUser}
+						className={!this.state.disableEdit ? "hidden" : "show"}
+					>
 						<i className="material-icons">delete</i>
 					</button>
 				</td>
