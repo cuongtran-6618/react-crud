@@ -4,7 +4,7 @@ import AddUser from "./AddUser";
 import Header from "./Header";
 import { users } from "../databases/fake/users";
 import { v4 as uuidv4 } from "uuid";
-import sortArray from "../util/sortArray";
+import * as util from "../util/utility";
 
 export class UserList extends Component {
 	constructor(props) {
@@ -56,9 +56,8 @@ export class UserList extends Component {
 	}
 
 	handleSorting(sortField, direction = "acs") {
-		console.log(sortField, direction);
 		this.setState((previousState) => ({
-			data: [...previousState.data].sort(sortArray(sortField, direction)),
+			data: [...previousState.data].sort(util.sortArray(sortField, direction)),
 		}));
 	}
 

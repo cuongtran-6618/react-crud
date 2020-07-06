@@ -23,7 +23,6 @@ export default class Header extends Component {
 	};
 
 	render() {
-		let idTitle, nameTitle, emailTitle, phoneTitle;
 		return (
 			<thead>
 				<tr>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { users } from "../databases/fake/users";
+import * as utility from "../util/utility";
 
 export class User extends Component {
 	constructor(props) {
@@ -12,44 +13,67 @@ export class User extends Component {
 			email: this.props.user.email,
 			phone: this.props.user.phone,
 		};
-
-		this.handleCancelEditUser = this.handleCancelEditUser.bind(this);
-		this.handleDeleteUser = this.handleDeleteUser.bind(this);
-		this.handleEnableEditUser = this.handleEnableEditUser.bind(this);
-		this.handleSaveUser = this.handleSaveUser.bind(this);
 	}
 
-	handleCancelEditUser(e) {}
+	handleCancelEditUser = (e) => {
+		let previousState = utility.fetchPreviousStateFromLocalStorage(
+			"email",
+			"name",
+			"phone"
+		);
 
-	handleDeleteUser(e) {
-		console.log("delete button clicked");
+		utility.loopObject(previousState, this.setStateByKey);
+	};
+
+	handleDeleteUser = (e) => {
 		this.props.onDeleteUser(this.state.id);
-	}
+	};
 
-	handleEnableEditUser(e) {
-		this.setState({
-			[e.target.name]: e.target.value,
-		});
-	}
+	//save the previous value to localstorage for recovering when customer doesn't wanna change
+	handleEnableEditUser = (e) => {
+		utility.saveStateToLocalStorage({ ...this.state });
+	};
 
-	handleSaveUser(e) {
-		console.log("edit button clicked");
+	handleOnChange = (e) => {
+		this.setStateByKey(e.target.name, e.target.value);
+	};
+
+	handleSaveUser = (e) => {
 		this.props.onEditUser(this.state);
-	}
+
+		//erase the localstorage
+		utility.saveStateToLocalStorage({ id: "", name: "", email: "", phone: "" });
+	};
+
+	setStateByKey = (key, value) => {
+		this.setState({
+			[key]: value,
+		});
+	};
 
 	render() {
-		const { id, name, email, phone } = this.props.user;
-
 		return (
 			<tr>
 				<td>
-					<input name="name" value={this.state.name} />
+					<input
+						name="name"
+						value={this.state.name}
+						onChange={this.handleOnChange}
+					/>
 				</td>
 				<td>
-					<input name="email" value={this.state.email} />
+					<input
+						name="email"
+						value={this.state.email}
+						onChange={this.handleOnChange}
+					/>
 				</td>
 				<td>
-					<input name="phone" value={this.state.phone} />
+					<input
+						name="phone"
+						value={this.state.phone}
+						onChange={this.handleOnChange}
+					/>
 				</td>
 				<td>
 					<button className="transparent" onClick={this.handleCancelEditUser}>
@@ -65,7 +89,6 @@ export class User extends Component {
 						Delete
 					</button>
 				</td>
-				<td></td>
 			</tr>
 		);
 	}
