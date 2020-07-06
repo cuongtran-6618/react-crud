@@ -1,25 +1,19 @@
 import React, { Component } from "react";
 
 export class AddUser extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			name: "",
-			email: "",
-			phone: "",
-		};
-		this.handleSubmitForm = this.handleSubmitForm.bind(this);
-		this.handleOnChange = this.handleOnChange.bind(this);
-		this.clearForm = this.clearForm.bind(this);
-	}
+	state = {
+		name: "",
+		email: "",
+		phone: "",
+	};
 
-	handleSubmitForm(e) {
+	handleSubmitForm = (e) => {
 		e.preventDefault();
 		this.props.onCreateUser(this.state);
 
 		// clear form after submit
 		this.clearForm();
-	}
+	};
 
 	clearForm() {
 		this.setState({
@@ -33,23 +27,25 @@ export class AddUser extends Component {
 		this.phoneInput.value = "";
 	}
 
-	handleOnChange(e) {
+	handleOnChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
-	}
+	};
 
 	render() {
 		let nameInput, emailInput, phoneInput;
 		return (
 			<div className="row white">
-				<form onSubmit={this.handleSubmitForm} className="col s12">
+				<form onSubmit={this.handleSubmitForm} className="">
 					<div className="col s3">
 						<input
 							name="name"
 							placeholder="Full name"
 							onChange={this.handleOnChange}
 							ref={(node) => (this.nameInput = node)}
+							className="browser-default"
+							type="text"
 						/>
 					</div>
 					<div className="col s3">
@@ -58,21 +54,22 @@ export class AddUser extends Component {
 							placeholder="Email address"
 							onChange={this.handleOnChange}
 							ref={(node) => (this.emailInput = node)}
+							className="browser-default"
+							type="text"
 						/>
 					</div>
-					<div className=" col s3">
+					<div className="col s3">
 						<input
 							name="phone"
 							placeholder="Phone number"
 							onChange={this.handleOnChange}
 							ref={(node) => (this.phoneInput = node)}
+							className="browser-default"
+							type="text"
 						/>
 					</div>
 					<div className="col s3">
-						<button
-							className="btn-small waves-effect waves-light right"
-							type="submit"
-						>
+						<button className="right" type="submit">
 							Add new user
 						</button>
 					</div>

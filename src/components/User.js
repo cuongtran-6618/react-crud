@@ -4,16 +4,12 @@ import { users } from "../databases/fake/users";
 import * as utility from "../util/utility";
 
 export class User extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			id: this.props.user.id,
-			name: this.props.user.name,
-			email: this.props.user.email,
-			phone: this.props.user.phone,
-		};
-	}
+	state = {
+		id: this.props.user.id,
+		name: this.props.user.name,
+		email: this.props.user.email,
+		phone: this.props.user.phone,
+	};
 
 	handleCancelEditUser = (e) => {
 		let previousState = utility.fetchPreviousStateFromLocalStorage(
@@ -54,39 +50,54 @@ export class User extends Component {
 	render() {
 		return (
 			<tr>
-				<td>
+				<td colSpan="1">
 					<input
+						disabled
 						name="name"
 						value={this.state.name}
 						onChange={this.handleOnChange}
+						className="browser-default"
+						type="text"
 					/>
 				</td>
-				<td>
+				<td colSpan="1">
 					<input
+						disabled
 						name="email"
 						value={this.state.email}
 						onChange={this.handleOnChange}
+						className="browser-default"
+						type="text"
 					/>
 				</td>
-				<td>
+				<td colSpan="1">
 					<input
+						disabled
 						name="phone"
 						value={this.state.phone}
 						onChange={this.handleOnChange}
+						className="browser-default"
+						type="text"
 					/>
 				</td>
-				<td>
-					<button className="transparent" onClick={this.handleCancelEditUser}>
+				<td colSpan="1">
+					<button
+						className="btn-cancel hidden"
+						onClick={this.handleCancelEditUser}
+					>
 						Cancel
 					</button>
-					<button className="transparent" onClick={this.handleSaveUser}>
-						Save change
+					<button className="btn-save hidden" onClick={this.handleSaveUser}>
+						Save
 					</button>
-					<button className="transparent" onClick={this.handleEnableEditUser}>
-						Enable Edit
+					<button
+						className="transparent right"
+						onClick={this.handleEnableEditUser}
+					>
+						<i className="material-icons">create</i>
 					</button>
-					<button className="transparent" onClick={this.handleDeleteUser}>
-						Delete
+					<button className="transparent right" onClick={this.handleDeleteUser}>
+						<i className="material-icons">delete</i>
 					</button>
 				</td>
 			</tr>
