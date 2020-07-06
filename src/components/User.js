@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { users } from "../databases/fake/users";
 import * as utility from "../util/utility";
 
 export class User extends Component {
@@ -100,21 +98,18 @@ export class User extends Component {
 						Cancel
 					</button>
 					<button
-						className="btn-save"
 						onClick={this.handleSaveUser}
 						className={this.state.disableEdit ? "hidden" : "show"}
 					>
 						Save
 					</button>
 					<button
-						className="transparent right"
 						onClick={this.handleEnableEditUser}
 						className={!this.state.disableEdit ? "hidden" : "show"}
 					>
 						<i className="material-icons">create</i>
 					</button>
 					<button
-						className="transparent right"
 						onClick={this.handleDeleteUser}
 						className={!this.state.disableEdit ? "hidden" : "show"}
 					>

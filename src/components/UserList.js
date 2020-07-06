@@ -39,9 +39,7 @@ export class UserList extends Component {
 		this.setState((previousState) => ({
 			data: [
 				...previousState.data.filter((user) => {
-					if (user.id !== id) {
-						return user;
-					}
+					return user.id !== id ? user : null;
 				}),
 			],
 		}));

@@ -34,7 +34,6 @@ export class AddUser extends Component {
 	};
 
 	render() {
-		let nameInput, emailInput, phoneInput;
 		return (
 			<div className="row white">
 				<form onSubmit={this.handleSubmitForm} className="">
