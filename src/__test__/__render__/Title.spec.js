@@ -6,7 +6,7 @@ import { shallow } from "enzyme";
 import Title from "../../components/Title";
 
 describe("Title", () => {
-	it("should render my component", () => {
+	it("should render title without error", () => {
 		const wrapper = shallow(<Title />);
 	});
 });
