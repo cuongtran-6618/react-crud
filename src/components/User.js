@@ -53,7 +53,7 @@ export class User extends Component {
 
 	setStateByKey = (key, value) => {
 		this.setState({
-			[key]: ([...this.state[key]] = value),
+			[key]: value,
 		});
 	};
 
