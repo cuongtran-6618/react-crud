@@ -12,43 +12,47 @@ export class UserList extends Component {
 	};
 
 	handleCreate = (user) => {
-		this.setState((previousState) => ({
-			data: [...previousState.data, { ...user, id: uuidv4() }],
-		}));
+		this.setState({
+			data: [...this.state.data, { ...user, id: uuidv4() }],
+		});
 	};
 
-	handleEdit = (updatedUser) => {
-		let data = [...this.state.data];
-		data = data.map((user) => {
-			return user.id === updatedUser.id
-				? {
-						...user,
-						name: updatedUser.name,
-						email: updatedUser.email,
-						phone: updatedUser.phone,
-				  }
-				: user;
+	handleEdit = (modifiedUser) => {
+		const updatedData = [...this.state.data].map((user) => {
+			if (user.id !== modifiedUser.id) {
+				return user;
+			}
+
+			return {
+				...user,
+				name: modifiedUser.name,
+				email: modifiedUser.email,
+				phone: modifiedUser.phone,
+			};
 		});
 
-		this.setState((previousState) => ({
-			data,
-		}));
+		this.setState({
+			data: ([...this.state.data] = updatedData),
+		});
 	};
 
 	handleDelete = (id) => {
-		this.setState((previousState) => ({
-			data: [
-				...previousState.data.filter((user) => {
-					return user.id !== id ? user : null;
-				}),
-			],
-		}));
+		const updatedData = [...this.state.data].filter((user) => {
+			return user.id !== id ? user : null;
+		});
+		this.setState({
+			data: ([...this.state.data] = updatedData),
+		});
 	};
 
 	handleSorting = (sortField, direction = "acs") => {
-		this.setState((previousState) => ({
-			data: [...previousState.data].sort(util.sortArray(sortField, direction)),
-		}));
+		const sortingUser = [...this.state.data].sort(
+			util.sortArray(sortField, direction)
+		);
+
+		this.setState({
+			data: ([...this.state.data] = sortingUser),
+		});
 	};
 
 	render() {
@@ -60,6 +64,7 @@ export class UserList extends Component {
 				onDeleteUser={this.handleDelete}
 			/>
 		));
+
 		return (
 			<div>
 				<AddUser onCreateUser={this.handleCreate} />

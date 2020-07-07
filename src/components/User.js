@@ -11,7 +11,7 @@ export class User extends Component {
 	};
 
 	handleCancelEditUser = (e) => {
-		let previousState = utility.fetchPreviousStateFromLocalStorage(
+		const previousState = utility.fetchPreviousStateFromLocalStorage(
 			"email",
 			"name",
 			"phone"
@@ -52,9 +52,9 @@ export class User extends Component {
 	};
 
 	setStateByKey = (key, value) => {
-		this.setState((previousState) => ({
-			[key]: (previousState[key] = value),
-		}));
+		this.setState({
+			[key]: ([...this.state[key]] = value),
+		});
 	};
 
 	render() {

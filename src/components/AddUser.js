@@ -17,19 +17,15 @@ export class AddUser extends Component {
 
 	clearForm() {
 		this.setState({
-			name: "",
-			email: "",
-			phone: "",
+			name: ([...this.state.name] = ""),
+			email: ([...this.state.email] = ""),
+			phone: ([...this.state.phone] = ""),
 		});
-
-		this.nameInput.value = "";
-		this.emailInput.value = "";
-		this.phoneInput.value = "";
 	}
 
 	handleOnChange = (e) => {
 		this.setState({
-			[e.target.name]: e.target.value,
+			[e.target.name]: ([...this.state[e.target.name]] = e.target.value),
 		});
 	};
 
@@ -42,7 +38,7 @@ export class AddUser extends Component {
 							name="name"
 							placeholder="Full name"
 							onChange={this.handleOnChange}
-							ref={(node) => (this.nameInput = node)}
+							value={this.state.name}
 							className="browser-default"
 							type="text"
 						/>
@@ -52,8 +48,8 @@ export class AddUser extends Component {
 							name="email"
 							placeholder="Email address"
 							onChange={this.handleOnChange}
-							ref={(node) => (this.emailInput = node)}
 							className="browser-default"
+							value={this.state.email}
 							type="text"
 						/>
 					</div>
@@ -62,8 +58,8 @@ export class AddUser extends Component {
 							name="phone"
 							placeholder="Phone number"
 							onChange={this.handleOnChange}
-							ref={(node) => (this.phoneInput = node)}
 							className="browser-default"
+							value={this.state.phone}
 							type="text"
 						/>
 					</div>
