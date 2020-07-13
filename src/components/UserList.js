@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import User from "./User";
 import AddUser from "./AddUser";
 import Header from "./Header";
+import Title from "./Title";
 import { users } from "../databases/fake/users";
 import { v4 as uuidv4 } from "uuid";
 import * as util from "../util/utility";
@@ -68,6 +69,7 @@ export class UserList extends Component {
 
 		return (
 			<div>
+				<Title user={this.state.data} />
 				<AddUser onCreateUser={this.handleCreate} />
 				<table className="white">
 					<Header user={this.state.data} onSortUser={this.handleSorting} />
