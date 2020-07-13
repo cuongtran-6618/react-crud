@@ -28,6 +28,7 @@ export class UserList extends Component {
 				name: modifiedUser.name,
 				email: modifiedUser.email,
 				phone: modifiedUser.phone,
+				company: modifiedUser.company,
 			};
 		});
 

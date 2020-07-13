@@ -5,6 +5,7 @@ export class AddUser extends Component {
 		name: "",
 		email: "",
 		phone: "",
+		company: "",
 	};
 
 	handleSubmitForm = (e) => {
@@ -20,6 +21,7 @@ export class AddUser extends Component {
 			name: ([...this.state.name] = ""),
 			email: ([...this.state.email] = ""),
 			phone: ([...this.state.phone] = ""),
+			company: ([...this.state.company] = ""),
 		});
 	}
 
@@ -33,7 +35,7 @@ export class AddUser extends Component {
 		return (
 			<div className="row white">
 				<form onSubmit={this.handleSubmitForm} className="">
-					<div className="col s3">
+					<div className="col s6">
 						<input
 							name="name"
 							placeholder="Full name"
@@ -43,7 +45,7 @@ export class AddUser extends Component {
 							type="text"
 						/>
 					</div>
-					<div className="col s3">
+					<div className="col s6">
 						<input
 							name="email"
 							placeholder="Email address"
@@ -53,7 +55,7 @@ export class AddUser extends Component {
 							type="text"
 						/>
 					</div>
-					<div className="col s3">
+					<div className="col s6">
 						<input
 							name="phone"
 							placeholder="Phone number"
@@ -63,8 +65,20 @@ export class AddUser extends Component {
 							type="text"
 						/>
 					</div>
-					<div className="col s3">
-						<button className="right" type="submit">
+
+					<div className="col s6">
+						<input
+							name="company"
+							placeholder="Company"
+							onChange={this.handleOnChange}
+							className="browser-default"
+							value={this.state.company}
+							type="text"
+						/>
+					</div>
+
+					<div className="col s6 btn-center no-margin-left">
+						<button className="left" type="submit">
 							Add new user
 						</button>
 					</div>

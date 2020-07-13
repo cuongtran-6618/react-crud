@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import * as utility from "../util/utility";
 
 export class User extends Component {
@@ -7,6 +8,7 @@ export class User extends Component {
 		name: this.props.user.name,
 		email: this.props.user.email,
 		phone: this.props.user.phone,
+		company: this.props.user.company,
 		disableEdit: true,
 	};
 
@@ -14,7 +16,8 @@ export class User extends Component {
 		const previousState = utility.fetchPreviousStateFromLocalStorage(
 			"email",
 			"name",
-			"phone"
+			"phone",
+			"company"
 		);
 
 		utility.loopObject(previousState, this.setStateByKey);
@@ -39,7 +42,13 @@ export class User extends Component {
 		this.props.onEditUser(this.state);
 
 		//erase the localstorage
-		utility.saveStateToLocalStorage({ id: "", name: "", email: "", phone: "" });
+		utility.saveStateToLocalStorage({
+			id: "",
+			name: "",
+			email: "",
+			phone: "",
+			company: "",
+		});
 		this.hideEditForm();
 	};
 
@@ -90,6 +99,16 @@ export class User extends Component {
 						type="text"
 					/>
 				</td>
+				<td colSpan="1">
+					<input
+						disabled={this.state.disableEdit}
+						name="company"
+						value={this.state.company}
+						onChange={this.handleOnChange}
+						className="browser-default"
+						type="text"
+					/>
+				</td>
 				<td colSpan="1" className="actions-container">
 					<button
 						className={this.state.disableEdit ? "hidden" : "show"}
@@ -120,5 +139,16 @@ export class User extends Component {
 		);
 	}
 }
+
+User.propTypes = {
+	//type check the data
+	user: PropTypes.shape({
+		id: PropTypes.string,
+		name: PropTypes.string,
+		company: PropTypes.string,
+		email: PropTypes.string,
+		phone: PropTypes.string,
+	}),
+};
 
 export default User;

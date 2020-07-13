@@ -6,6 +6,7 @@ export default class Header extends Component {
 		name: "",
 		email: "",
 		phone: "",
+		company: "",
 	};
 
 	handleClickOnTitle = (field) => (e) => {
@@ -30,6 +31,9 @@ export default class Header extends Component {
 					</th>
 					<th colSpan="1" onClick={this.handleClickOnTitle("phone")}>
 						Phone
+					</th>
+					<th colSpan="1" onClick={this.handleClickOnTitle("company")}>
+						Company
 					</th>
 					<th colSpan="1"></th>
 				</tr>
